@@ -12,3 +12,6 @@ Reset your Passwword
 Thanks,<br>
 {{ config('app.name') }}
 @endcomponent
+
+
+{{--jjkkkk--}}
