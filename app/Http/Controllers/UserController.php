@@ -83,6 +83,11 @@ class UserController extends Controller
         {
             return view('parent.my_account', $data);
         }
+
+        else if(Auth::user()->user_type == 5)
+        {
+            return view('account.my_account', $data);
+        }
                  
     }
 

@@ -78,6 +78,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('admin/accountant/list')}}" class="nav-link @if(Request::segment(2) == 'accountant') active @endif">
+              <i class="fas fa-chalkboard-teacher"></i>
+              <p>
+                Accountant
+              </p>
+            </a>
+          </li>
           <li class="nav-item  @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'assign_subject'
           || Request::segment(2) == 'class_timetable' || Request::segment(2) == 'assign_class_teacher' ) menu-is-opening menu-open @endif">
             <a href="#" class="nav-link  @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'assign_subject' ||
@@ -181,10 +189,11 @@
                 </a>
               </li> 
             </ul>
-          </li>        
+          </li>   
+
           <li class="nav-item  @if(Request::segment(2) == 'communicate') menu-is-opening menu-open @endif">
             <a href="#" class="nav-link  @if(Request::segment(2) == 'communicate') active @endif">
-              <i class="far fa-address-book"></i>
+              <i class="fas fa-phone-volume"></i>
               <p>
                 Communicate
                 <i class="fas fa-angle-left right"></i>
@@ -202,11 +211,39 @@
               <li class="nav-item">
                 <a href="{{ url('admin/communicate/send_email')}}" class="nav-link @if(Request::segment(3) == 'send_email') active @endif">
                  <i class="nav-icon far fa-envelope"></i>
-                  <p> Send Email</p>
+                  <p>Send Email</p>
                 </a>
               </li>       
             </ul>
-          </li>     
+          </li>   
+
+          <li class="nav-item  @if(Request::segment(2) == 'User_Management') menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link  @if(Request::segment(2) == ' User_Management') active @endif">
+              <i class="far fa-address-book"></i>
+              <p>
+                User Management
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('admin/User_Management/view_users')}}" class="nav-link @if(Request::segment(3) == 'view_users') active @endif">
+                <i class="nav-icon fas fa-eye"></i>
+                  <p>View Users</p>
+                </a>
+              </li> 
+             </ul>
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('admin/User_Management/Users')}}" class="nav-link @if(Request::segment(3) == 'Users') active @endif">
+                 <i class="nav-icon far fa-user"></i>
+                  <p>Users</p>
+                </a>
+              </li>       
+            </ul>
+          </li>   
+          
+          
           <li class="nav-item">
               <a href="{{ url('admin/account')}}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
                 <i class="nav-icon far fa-user"></i>
@@ -440,7 +477,26 @@
                 Change Password
               </p>
             </a>
-          </li>         
+          </li>
+
+          @elseif(Auth::user()->user_type == 5)
+            <li class="nav-item">
+                <a href="{{ url('account/dashboard')}}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
+                   <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('account/accountant')}}" class="nav-link @if(Request::segment(2) == 'accountant') active @endif">
+                <i class="fas fa-user-graduate"></i>
+                  <p>
+                    Accountant
+                  </p>
+                </a>
+            </li>
+          
           @endif    
         </ul>
       </nav>

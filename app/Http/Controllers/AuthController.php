@@ -33,6 +33,10 @@ class AuthController extends Controller
             {
                 return redirect('parent/dashboard');
             }     
+            else if(Auth::user()->user_type == 5)
+            {
+                return redirect('accountant/dashboard');
+            }     
         }
         return view('auth.login');
         Auth::logout();
@@ -61,7 +65,11 @@ class AuthController extends Controller
             else if(Auth::user()->user_type == 4)
             {
                 return redirect('parent/dashboard');
-            }     
+            }
+            else if(Auth::user()->user_type == 5)
+            {
+                return redirect('accountant/dashboard');
+            }          
         }
         else
         {

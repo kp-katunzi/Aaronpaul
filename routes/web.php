@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountantController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\FeeCollectionController;
+use App\Http\Controllers\UserManagementController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -69,6 +71,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/parent/assign_student_parent_delete/{sudent_id}', [ParentController::class,'assignStudentParentDelete']);
     Route::post('admin/parent/export_parent', [ParentController::class,'export_parent']);
 
+
+    // User management admin/User_Management/view_users
+    Route::get('admin/User_Management/view_users', [UserManagementController::class,'view_users']);
+    Route::get('admin/User_Management/view/{id}/{role}', [UserManagementController::class, 'view_user_role'])->name('view.user.role');
+
+    // Route::get('admin/User_Management/edit/{id}', [UserManagementController::class,'edit_view_users']);
     // class url
 
     Route::get('admin/class/list', [ClassController::class,'list']);
@@ -225,14 +233,7 @@ Route::group(['middleware' =>'student'], function(){
 
     
     Route::get('student/stripe/payment-error', [FeeCollectionController::class,'PaymentError']);
-    Route::get( 'student/stripe/payment-succuss', [FeeCollectionController::class,'PaymentSuccessStripe']);
-
-
-   
-   
-
-   
-  
+    Route::get( 'student/stripe/payment-succuss', [FeeCollectionController::class,'PaymentSuccessStripe']); 
         
 });
 
@@ -248,9 +249,14 @@ Route::group(['middleware' =>'parent'], function(){
     Route::get('parent/my_student/exam_result/{student_id}', [ExaminationsController::class,'ParentMyExamResult']);
     Route::get('parent/my_exam_result/print', [ExaminationsController::class,'myExamResultPrint']);
     
-    Route::get('parent/my_notice_board', [CommunicateController::class,'MyNoticeBoardParent']);
-    
+    Route::get('parent/my_notice_board', [CommunicateController::class,'MyNoticeBoardParent']);   
+});
+
+
+Route::group(['middleware' =>'account'], function(){
+    Route::get('accountant/dashboard', [DashboardController::class,'dashboard']);
 
      
 });
+
 
